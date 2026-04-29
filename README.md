@@ -21,19 +21,21 @@ Glucose(t) = Baseline + BGP(t)
 50 patients
 10 time points per patient
 Measurements: plasma glucose concentration (mg/dL)
+Glucose Response Modeling (OGTT) – Parameter Estimation & Analysis
 
 ## Methods
 Parameter Estimation
-Nonlinear least squares fitting is performed using:
-scipy.optimize.curve_fit
+  Nonlinear least squares fitting is performed using:
+  scipy.optimize.curve_fit
 Simulation
-Each patient curve is simulated over 100 time points.
-Extracted Features
-For each patient:
-Area Under Curve (AUC)
-Maximum glucose value (Cmax)
-Time to peak (Tmax)
-Return time to within +5% of baseline
+  Each patient curve is simulated over 100 time points.
+  Extracted Features
+For each patient, the following metrics are computed:
+ . Area Under Curve (AUC)
+ . Maximum glucose value (Cmax)
+ . Time to peak (Tmax)
+ . Return time to within +5% of baseline
+ . RMSE (model error) 
 Diagnosis Criteria
 A patient is flagged as "Glucose Intolerant" if:
 Baseline glucose > 110 mg/dL
@@ -47,28 +49,28 @@ NumPy
 SciPy
 Matplotlib
 
-glucose-modeling-matlab/
-│
-├── data/
-│   └── glucose_data.txt
-├── src/
-│   ├── main.m
-│   ├── fitModel.m
-│   ├── simulateCurve.m
-│   └── computeMetrics.m
-├── results/
-│   └── results.csv
-└── README.md
+The model captures the rise and decay of glucose concentration after intake, showing good agreement with measured data.
+The variability in AUC reflects inter-patient differences in glucose response.
+The RMSE distribution shows that the model provides a consistent fit across patients.
+
+## Project Structure
 
 
-Project Structure
-glucose-modeling/
-│
-├── data/
-│   └── glucose_data.txt
-├── main.py
-├── model.py
-├── analysis.py
-└── README.md
+## Key Insights
+Glucose response varies significantly between patients
+The model captures the main physiological trend despite its simplicity
+RMSE values indicate generally good fitting performance
+AUC and Tmax provide meaningful indicators of metabolic response
+
+## Tech Stack
+Python
+NumPy
+SciPy
+Matplotlib
+Pandas
+
+This project demonstrates how physiological modeling can be combined with data analysis techniques to extract insights from clinical data.
+It reflects a transition from Biomedical Engineering → Data Science / AI, focusing on real-world health data applications.
+
 
 Martina Misiano
