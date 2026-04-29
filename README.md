@@ -47,6 +47,20 @@ NumPy
 SciPy
 Matplotlib
 
+glucose-modeling-matlab/
+│
+├── data/
+│   └── glucose_data.txt
+├── src/
+│   ├── main.m
+│   ├── fitModel.m
+│   ├── simulateCurve.m
+│   └── computeMetrics.m
+├── results/
+│   └── results.csv
+└── README.md
+
+
 Project Structure
 glucose-modeling/
 │
