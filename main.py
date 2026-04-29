@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
-
+import os
+os.makedirs("plots", exist_ok=True)
 # ======================
 # MODELLO
 # ======================
@@ -12,9 +13,10 @@ def model(t, A, a, b):
 # ======================
 # CARICAMENTO DATI
 # ======================
-data = pd.read_csv("glucosio_ospedale_1.txt", sep=" ")
+data = pd.read_csv("glucosio_ospedale_1.txt", delim_whitespace=True)
+data.columns = ["patient", "time", "glucose"]
 
-patients = data["paziente"].unique()
+patients = data["patient"].unique()
 
 results = []
 
@@ -23,10 +25,10 @@ results = []
 # ======================
 for p in patients:
     
-    subset = data[data["paziente"] == p]
+    subset = data[data["patient"] == p]
     
-    t = subset["tempo(ore)"].values
-    gluc = subset["glucosio(mg/dl)"].values
+    t = subset["time"].values
+    gluc = subset["glucose"].values
     
     baseline = gluc[0]
     BGP = gluc - baseline
@@ -42,6 +44,7 @@ for p in patients:
         continue
     
     A, a, b = popt
+    rmse = np.sqrt(np.mean((gluc - (baseline + model(t, A, a, b)))**2))
     
     # ======================
     # SIMULAZIONE
@@ -73,7 +76,7 @@ for p in patients:
     else:
         diagnosis = "Normal"
     
-    results.append([p, A, a, b, AUC, Cmax, Tmax, T_return, diagnosis])
+    results.append([p, A, a, b, AUC, Cmax, Tmax, T_return, rmse, diagnosis])
     
     # ======================
     # PLOT (solo primi 3 pazienti)
@@ -86,13 +89,21 @@ for p in patients:
         plt.ylabel("Glucose (mg/dL)")
         plt.title(f"Patient {p}")
         plt.legend()
-        plt.show()
-
+        plt.savefig(f"plots/patient_{p}.png")
+        plt.close()
+        
 # ======================
 # RISULTATI
 # ======================
-columns = ["Patient", "A", "a", "b", "AUC", "Cmax", "Tmax", "T_return", "Diagnosis"]
+columns = ["Patient", "A", "a", "b", "AUC", "Cmax", "Tmax", "T_return", "RMSE", "Diagnosis"]
 df_results = pd.DataFrame(results, columns=columns)
+plt.figure()
+plt.hist(df_results["AUC"], bins=15)
+plt.xlabel("AUC")
+plt.ylabel("Frequency")
+plt.title("AUC Distribution")
+plt.savefig("plots/auc_distribution.png")
+plt.close()
 
 print(df_results.head())
 df_results.to_csv("results.csv", index=False)
