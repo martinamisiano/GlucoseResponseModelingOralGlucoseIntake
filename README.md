@@ -1,76 +1,55 @@
-# GlucoseResponseModelingOralGlucoseIntake
-This project models the plasma glucose response after an Oral Glucose Tolerance Test (OGTT) using a bi-exponential model.
-The goal is to:
-Estimate patient-specific kinetic parameters
-Simulate glucose concentration curves
-Extract clinically relevant indicators
-Identify potential glucose intolerance conditions
-
-## Mathematical Model
-The glucose variation from baseline is modeled as:
-BGP(t) = A * (exp(-at) - exp(-bt))
-Where:
-A (mg/dL): amplitude
-a, b (h⁻¹): kinetic parameters
-BGP(t): glucose variation from baseline
-Total glucose concentration:
-Glucose(t) = Baseline + BGP(t)
-
-
+## Glucose Response Modeling (OGTT Analysis)
+Healthcare time-series analysis project focused on modeling glucose response curves using Oral Glucose Tolerance Test (OGTT) data.
+## Project Overview
+This project analyzes physiological glucose response data collected during OGTT testing. The objective was to model glucose dynamics over time, preprocess patient measurements, and explore patterns in glucose metabolism.
+The project combines:
+Time-series analysis
+Physiological data preprocessing
+Mathematical modeling
+Exploratory data analysis
+Healthcare analytics using Python
+## Objectives
+Clean and preprocess OGTT patient data
+Analyze glucose response trends
+Fit mathematical models to glucose response curves
+Explore variability between patients
+Visualize time-series glucose dynamics
 ## Dataset
 50 patients
-10 time points per patient
-Measurements: plasma glucose concentration (mg/dL)
-Glucose Response Modeling (OGTT) – Parameter Estimation & Analysis
-
-## Methods
-Parameter Estimation
-  Nonlinear least squares fitting is performed using:
-  scipy.optimize.curve_fit
-Simulation
-  Each patient curve is simulated over 100 time points.
-  Extracted Features
-For each patient, the following metrics are computed:
- . Area Under Curve (AUC)
- . Maximum glucose value (Cmax)
- . Time to peak (Tmax)
- . Return time to within +5% of baseline
- . RMSE (model error) 
-Diagnosis Criteria
-A patient is flagged as "Glucose Intolerant" if:
-Baseline glucose > 110 mg/dL
-OR
-Peak glucose > 250 mg/dL
-
-Tech Stack
-Matlab
-Python
-NumPy
-SciPy
-Matplotlib
-
-The model captures the rise and decay of glucose concentration after intake, showing good agreement with measured data.
-The variability in AUC reflects inter-patient differences in glucose response.
-The RMSE distribution shows that the model provides a consistent fit across patients.
-
-## Project Structure
-
-
-## Key Insights
-Glucose response varies significantly between patients
-The model captures the main physiological trend despite its simplicity
-RMSE values indicate generally good fitting performance
-AUC and Tmax provide meaningful indicators of metabolic response
-
+10 glucose measurements per patient
+Time-series physiological data
 ## Tech Stack
 Python
-NumPy
-SciPy
-Matplotlib
-Pandas
-
-This project demonstrates how physiological modeling can be combined with data analysis techniques to extract insights from clinical data.
-It reflects a transition from Biomedical Engineering → Data Science / AI, focusing on real-world health data applications.
-
-
+pandas
+numpy
+matplotlib
+seaborn
+## Features
+Data cleaning and preprocessing
+Missing value handling
+Time-series visualization
+Curve modeling and parameter estimation
+Statistical analysis of glucose trends
+## Example Analysis
+The project explores:
+Peak glucose response
+Recovery trends over time
+Patient variability
+Comparative glucose dynamics
+Project Structure
+├── data/
+├── notebooks/
+├── figures/
+├── src/
+└── README.md
+## Future Improvements
+Interactive dashboards with Power BI or Streamlit
+Predictive modeling using machine learning
+Larger clinical datasets
+Real-world healthcare integration
+## Author
 Martina Misiano
+LinkedIn: www.linkedin.com/in/martina-misiano-a1933a340
+GitHub: https://github.com/martinamisiano
+
+
