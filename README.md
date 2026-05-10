@@ -49,7 +49,6 @@ Larger clinical datasets
 Real-world healthcare integration
 ## Author
 Martina Misiano
-LinkedIn: www.linkedin.com/in/martina-misiano-a1933a340
-GitHub: https://github.com/martinamisiano
+
 
 
